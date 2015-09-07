@@ -155,6 +155,21 @@ $(function() {
       katex.render (code, element, { displayMode: false });
     });
 
+
+    $('.tree-list').append('<div id="navigation-mobile">'+
+        '<select id="navigation-mobile-select"></select>'+
+        '</div>');
+    var $mobileSelect = $('#navigation-mobile-select');
+    $('#abc-view li').each(function (index, element) {
+        var option = document.createElement("option");
+        option.text = $(element).data('name');
+        option.value = $(element).find('a').attr('href');
+        $mobileSelect.append(option);
+    });
+    $mobileSelect.change(function(e) {
+        window.location.hash = $mobileSelect.val()
+    });
+
     // in view plugin
     (function( $ ) {
         $.fn.inView = function() {
