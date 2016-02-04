@@ -65,12 +65,12 @@ body h3 small {
 }
 
 #input-reference>section>ul.item-list {
-  margin: 10px;
+  margin: 0 0 10px 10px;
   padding: 0;
 }
 
 #input-reference>section>ul.item-list>li {
-  padding: 10px;
+  padding: 0 0 10px 10px;
   list-style: none;
   transition: box-shadow 0.2s;
   border-bottom: 1px solid #CCC;
@@ -91,13 +91,13 @@ body h3 small {
   opacity: 0.5;
 }
 
-.description:before {
+/*.description:before {
   content: '"';
 }
 
 .description:after {
   content: '"';
-}
+}*/
 
 .no-description {
   font-style: italic;
@@ -155,6 +155,8 @@ ul.nav-bar li {
   font-size: 0.9em;
   line-height: 16px;
   float: right;
+  padding-right: 10px;
+  padding-left: 30px;
 }
 
 body h2 {
@@ -320,6 +322,40 @@ body .search-wrapper {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
 }
 
+section>header>div {
+    margin: 0;
+    padding: 0;
+}
+section>header>div>a {
+    /*position: absolute;*/
+    /*left: 300px;*/
+    float: right;
+}
+
+header>.description::before {
+    content: none;
+    font-size: 15px;
+    display: block;
+    padding: 0;
+    padding-top: 10px;
+    margin: 0;
+    height: 25px;
+    color: #333;
+    opacity: 0.5;
+}
+
+.section-list {
+    display: block;
+    font-size: 1.3em;
+    margin: 15px 0 5px 0;
+    font-weight: bold;
+    opacity: 0.7;
+    font-style: normal;
+}
+.main-section>.section-list {
+    padding-left: 15px;
+}
+
 @media (max-width: 991px) {
   .nav-tabs, .tab-content {
     display: none;
@@ -335,4 +371,46 @@ body .search-wrapper {
   #navigation-mobile {
     display: none;
   }  
+}
+
+
+.main-section .item-list li {
+    clear: both;
+}
+.main-section .item-list li::after {
+    content: " "
+    clear: both;
+}
+
+.item-key-value {
+    max-width: 400px;
+}
+
+section[data-obsolete="1"]{
+    border: 1px solid #F00;
+    padding: 5px;
+}
+section p.obsolete::before, section p.obsolete::after {
+    content: "\e101";
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    padding: 3px 5px;
+}
+/*glyphicon-exclamation-sign*/
+
+section p.obsolete {
+    color: #FFF;
+    font-weight: bold;
+    border: 1px solid #F00;
+    border-radius: 3px;
+    padding: 3px 10px;
+    background: #F00;
+    font-size: 1.2em;
+    text-align: center;
 }
