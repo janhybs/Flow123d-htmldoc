@@ -389,6 +389,7 @@ header>.description::before {
 section[data-obsolete="1"]{
     border: 1px solid #F00;
     padding: 5px;
+    margin-bottom: 10px;
 }
 section p.obsolete::before, section p.obsolete::after {
     content: "\e101";
