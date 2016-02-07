@@ -27,6 +27,15 @@ function getGroupStates () {
 
     return result;
 }
+
+function getURLElement () {
+    if (!window.location.hash)
+        return null;
+
+    var hash = window.location.hash;
+    return $ (hash).hasClass ('main-section') ? $(hash) : null;
+}
+
 $(window).on('hashchange', function(e) {
     var urlElement = getURLElement ();
     if (isFilterOneMode()) {
@@ -40,15 +49,12 @@ $(window).on('hashchange', function(e) {
       if (urlElement)
           urlElement.removeClass ('hidden');
     }
+    
+    if (urlElement)
+    setTimeout(function() {
+        $(document.body).scrollTop(urlElement.offset().top);  
+    }, 1);
 });
-
-function getURLElement () {
-    if (!window.location.hash)
-        return null;
-
-    var hash = window.location.hash;
-    return $ (hash).hasClass ('main-section') ? $(hash) : null;
-}
 
 $(document).on('mode-changed', function () {
     var singleMode = isFilterOneMode();
@@ -94,13 +100,33 @@ $(document).on('filter-changed', function () {
     });
 });
 
-$(document).on('dimension-change', function() {
+$(document).on('scroll-changed', function() {
+  if ($(window).scrollTop() > $('#input-reference').offset().top) {
+      $('#top-link-block').css('left', $('#input-reference').width() + $('#input-reference').offset().left);
+      $('#top-link-block').show();
+  } else {
+      $('#top-link-block').hide();
+  }
+  
+  var parentTop = $('.tree-list').parent().offset().top;
+  var bodyScroll = $(document.body).scrollTop();
+  $('.tree-list').css({
+    'top': Math.max(bodyScroll - parentTop, 0)+'px'
+  })
+});
+
+$(document).on('dimension-changed', function() {
     if ($(window).scrollTop() > $('#input-reference').offset().top) {
         $('#top-link-block').css('left', $('#input-reference').width() + $('#input-reference').offset().left);
         $('#top-link-block').show();
     } else {
         $('#top-link-block').hide();
     }
+    
+    $('.tab-pane').css({
+      'max-height': ($(window).height() - $('.nav-tabs').height() - 20)+'px',
+      'overflow': 'auto',
+    })
 });
 
 $(function() {
@@ -136,13 +162,15 @@ $(function() {
         });
     });
 
+    // hand over resizing and scrolling
     $(window).resize(function() {
-      $(document).trigger ('dimension-change');
+      $(document).trigger ('dimension-changed');
     });
     $(window).scroll(function() {
-        $(document).trigger ('dimension-change');
+        $(document).trigger ('scroll-changed');
     });
 
+    // expanding latex expressions
     var latex = $('.md-expression');
     latex.each (function (index, element){
       var code = $(element).text();
@@ -156,6 +184,7 @@ $(function() {
     });
 
 
+    // mobile support
     $('.tree-list').append('<div id="navigation-mobile">'+
         '<select id="navigation-mobile-select"></select>'+
         '</div>');
@@ -180,4 +209,7 @@ $(function() {
             return ot > st && ($(this).height() + ot) < (st + wh);
         };
     })( jQuery );
+    
+    $(document).trigger ('hashchange');
+    $(document).trigger ('dimension-changed');
 });

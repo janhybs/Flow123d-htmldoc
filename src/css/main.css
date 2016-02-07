@@ -238,6 +238,7 @@ body .abc-list {
 body .tree-list {
   text-align: left;
   padding-left: 0;
+  position: relative;
 }
 
 body .abc-list, body .tree-list, #button-control {
