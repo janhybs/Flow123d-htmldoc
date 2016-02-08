@@ -416,3 +416,8 @@ section p.obsolete {
     font-size: 1.2em;
     text-align: center;
 }
+
+.tab-pane a.active {
+    font-weight: bold;
+    color: #080808;
+}

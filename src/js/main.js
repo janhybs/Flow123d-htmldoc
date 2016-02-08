@@ -1,5 +1,6 @@
 var ist = (function() {
-    __debug__ = true;
+    var __debug__ = false;
+    var scrollspy_href = null;
     
     function isFilterOneMode() {
         // if no such element exists return always true
@@ -13,6 +14,21 @@ var ist = (function() {
 
     function getHiddenElements() {
         return $('#input-reference>.main-section:hidden');
+    };
+    
+    function getActiveElement() {
+        if ($(window).scrollTop() <= 50)
+            return null;
+        
+        var elements = getVisibleElements();
+        var $element = null;
+        elements.each(function(index, element) {
+            if ($(element).startInView()) {
+                $element = $(element);
+                return false;
+            }
+        });
+        return $element;
     };
 
     function disableBtnGroup(state) {
@@ -68,6 +84,12 @@ var ist = (function() {
         var singleMode = isFilterOneMode();
         disableBtnGroup(singleMode);
         if (singleMode) {
+            
+            if (scrollspy_href) {
+                scrollspy_href.removeClass('active');
+                scrollspy_href = null;
+            }
+            
             $visible = getVisibleElements();
             var urlElement = getURLElement();
 
@@ -117,27 +139,45 @@ var ist = (function() {
         } else {
             $('#top-link-block').hide();
         }
-
         var parentTop = $('.tree-list').parent().offset().top;
         var bodyScroll = $(document.body).scrollTop();
         $('.tree-list').css({
             'top': Math.max(bodyScroll - parentTop, 0) + 'px'
         });
+        
+        // scrollspy works only with tree ordered items
+        // and only in multiple mode
+        if (!isFilterOneMode()) {
+            var $tv = $('#tree-view')
+            if ($tv.hasClass('active')) {
+                var perc = $(window).scrollTop()/$(document).height();
+                var scroll = perc * $tv[0].scrollHeight;
+                var hei = $tv.height();
+                scroll = Math.max(scroll - hei/2, 0);
+                $tv.scrollTop(scroll);
+            }
+        }
+        
+        var active = getActiveElement();
+        if (active && active != scrollspy_href) {
+            if (scrollspy_href) {
+                scrollspy_href.removeClass('active');
+                scrollspy_href = null;
+            }
+            scrollspy_href = $('.active ._'+active.attr('id'))
+            scrollspy_href.addClass('active');
+            // location.hash = 'item-'+active.attr('id');
+        }
     });
 
     $(document).on('dimension-changed', function() {
         if (__debug__) console.log('dimension-changed');
-        if ($(window).scrollTop() > $('#input-reference').offset().top) {
-            $('#top-link-block').css('left', $('#input-reference').width() + $('#input-reference').offset().left);
-            $('#top-link-block').show();
-        } else {
-            $('#top-link-block').hide();
-        }
-
-        $('.tree-list').css({
-            'max-height': ($(window).height() - 10) + 'px',
+        $('.tab-pane').css({
+            'max-height': ($(window).height() - $('.nav-tabs').height() - 50) + 'px',
             'overflow': 'auto',
         });
+        
+        $(document).trigger('scroll-changed');
     });
 
     $(function() {
@@ -221,11 +261,17 @@ var ist = (function() {
 
                 return ot > st && ($(this).height() + ot) < (st + wh);
             };
+            $.fn.startInView = function() {
+                var st = (document.documentElement.scrollTop || document.body.scrollTop),
+                    ot = $(this).offset().top,
+                    wh = (window.innerHeight && window.innerHeight < $(window).height()) ? window.innerHeight : $(window).height();
+
+                return ot >= st && (ot) <= (st + wh);
+            };
         })(jQuery);
 
         $(document).trigger('hashchange');
         $(document).trigger('dimension-changed');
-        $(document).trigger('scroll-changed');
     });
     return {
         isFilterOneMode: isFilterOneMode,
@@ -233,5 +279,6 @@ var ist = (function() {
         getHiddenElements: getHiddenElements,
         getURLElement: getURLElement,
         getGroupStates: getGroupStates,
+        getActiveElement: getActiveElement,
     }
 }());
