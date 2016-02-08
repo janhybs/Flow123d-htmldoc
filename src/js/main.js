@@ -164,7 +164,7 @@ var ist = (function() {
                 scrollspy_href.removeClass('active');
                 scrollspy_href = null;
             }
-            scrollspy_href = $('.active ._'+active.attr('id'))
+            scrollspy_href = $('.active .item_'+active.attr('id'))
             scrollspy_href.addClass('active');
             // location.hash = 'item-'+active.attr('id');
         }
