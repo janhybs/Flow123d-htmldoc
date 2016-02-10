@@ -373,6 +373,9 @@ header>.description::before {
 }*/
 
 
+section div.obsolete .obsolete-title {
+        font-weight: bold;
+}
 
 section div.obsolete .obsolete-title::before {
     content: "\e101";
@@ -405,7 +408,6 @@ section div.obsolete>p.description {
 
 section div.obsolete {
     color: #FFF;
-    font-weight: bold;
     border: 1px solid #F00;
     border-radius: 2px;
     padding: 5px 10px;
