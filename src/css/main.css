@@ -406,27 +406,28 @@ section div.obsolete>p.description {
 section div.obsolete {
     color: #FFF;
     font-weight: bold;
-    border: 10px solid #F00;
+    border: 1px solid #F00;
     border-radius: 2px;
     padding: 5px 10px;
     background: #F00;
     font-size: 1.2em;
-    border-top: 2px solid;
-    border-bottom: 2px solid;
+    border-left: 10px solid;
+    background-color: #FFF;
+    color: #000;
 }
 
 section.main-section.selection div.obsolete {
-    background-color: #522758;
+    /*background-color: #522758;*/
     border-color: #8D00A0;
 }
 
 section.main-section.record div.obsolete {
-    background-color: #2D4C69;
+    /*background-color: #2D4C69;*/
     border-color: #2088E8;
 }
 
 section.main-section.abstract-record div.obsolete {
-    background-color: #216719;
+    /*background-color: #216719;*/
     border-color: #2FB71F;
 }
 
