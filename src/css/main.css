@@ -73,10 +73,10 @@ body h3 small {
   padding: 0 0 10px 10px;
   list-style: none;
   transition: box-shadow 0.2s;
-  border-bottom: 1px solid #CCC;
+  border-top: 1px solid #CCC;
 }
 
-#input-reference>section>ul.item-list li:last-child {
+#input-reference>section>ul.item-list li:first-child {
   border: none;
 }
 
@@ -387,32 +387,149 @@ header>.description::before {
     max-width: 400px;
 }
 
-section[data-obsolete="1"]{
+/*section[data-obsolete="1"]{
     border: 1px solid #F00;
     padding: 5px;
     margin-bottom: 10px;
-}
-section p.obsolete::before, section p.obsolete::after {
+}*/
+
+
+
+section div.obsolete .obsolete-title::before {
     content: "\e101";
     position: relative;
-    top: 1px;
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
     font-weight: normal;
+    top: 1px;
     line-height: 1;
     -webkit-font-smoothing: antialiased;
     padding: 3px 5px;
 }
-/*glyphicon-exclamation-sign*/
 
-section p.obsolete {
+section div.obsolete>p {
+    padding: 0;
+    margin: 0;
+}
+
+section div.obsolete>p.description {
+    border: 1px solid #FFF;
+    width: 100%;
+    display: block;
+    padding: 5px;
+    text-align: left;
+    background: #EEE;
+    color: #000;
+    border-radius: 2px;
+}
+
+section div.obsolete {
     color: #FFF;
     font-weight: bold;
-    border: 1px solid #F00;
-    border-radius: 3px;
-    padding: 3px 10px;
+    border: 10px solid #F00;
+    border-radius: 2px;
+    padding: 5px 10px;
     background: #F00;
     font-size: 1.2em;
-    text-align: center;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+}
+
+section.main-section.selection div.obsolete {
+    background-color: #522758;
+    border-color: #8D00A0;
+}
+
+section.main-section.record div.obsolete {
+    background-color: #2D4C69;
+    border-color: #2088E8;
+}
+
+section.main-section.abstract-record div.obsolete {
+    background-color: #216719;
+    border-color: #2FB71F;
+}
+
+.tab-pane a.active {
+    font-weight: bold;
+    color: #080808;
+}
+
+section.record-key ul.side-info {
+    text-align: right;
+    list-style: none;
+    float: right;
+    padding: 10px;
+}
+
+section.record-key ul.side-info li {
+    padding: 0;
+    line-height: 1.2em;
+    font-size: 0.9em;
+}
+
+section.record-key ul::after {
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+section.record-key .clear {
+    clear: both;
+}
+
+section.record-key>a {
+    /*display: block;*/
+}
+
+section.record-key .description {
+    padding: 0;
+    padding-top: 15px;
+    font-size: 0.9em;
+    line-height: 1.2em;
+    /*display: inline-block;*/
+}
+
+#input-reference>section>ul.item-list>li.inline-list::after {
+    content: ', ';
+    font-size: 1.3em;
+}
+
+#input-reference>section>ul.item-list>li.inline-list::after::last-child {
+    content: ', '
+}
+
+#input-reference>section>ul.item-list>li.inline-list>a>h3 {
+    margin-right: 5px;
+}
+
+#input-reference>section>ul.item-list>li.inline-list {
+    display: inline;
+    border: none;
+    padding-right: 0;
+    font-size: 0.8em;
+    padding: 0;
+}
+
+#input-reference header>div>em {
+}
+#input-reference header>div>a {
+    position: absolute;
+    left: 230px;
+    float: none;
+}
+
+#input-reference .references {
+    display: block;
+    width: 100%;
+    padding-left: 400px;
+    text-align: right;
+    height: 10px;
+    font-size: 0.9em;
+}
+
+#input-reference .main-section h2 a {
+    color: inherit;
+    text-decoration: inherit;
 }
