@@ -56,14 +56,6 @@ h3 {
   display: inline-block;
 }
 
-.skew {
-  font-style: italic;
-}
-
-body h3 small {
-  font-size: 0.9em;
-}
-
 #input-reference>section>ul.item-list {
   margin: 0 0 10px 10px;
   padding: 0;
@@ -91,21 +83,9 @@ body h3 small {
   opacity: 0.5;
 }
 
-/*.description:before {
-  content: '"';
-}
-
-.description:after {
-  content: '"';
-}*/
-
 .no-description {
   font-style: italic;
   font-variant: small-caps;
-}
-
-.shortcut, .shortcut-r {
-  color: #999;
 }
 
 .shortcut:after {
@@ -246,7 +226,6 @@ body .abc-list, body .tree-list, #button-control {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 10px;
   border-radius: 2px;
-  /*border: 1px solid rgba(0, 0, 0, 0.2);*/;
 }
 
 body .abc-list a, body .tree-list a {
@@ -491,26 +470,6 @@ section.record-key .description {
     /*display: inline-block;*/
 }
 
-#input-reference>section>ul.item-list>li.inline-list::after {
-    content: ', ';
-    font-size: 1.3em;
-}
-
-#input-reference>section>ul.item-list>li.inline-list::after::last-child {
-    content: ', '
-}
-
-#input-reference>section>ul.item-list>li.inline-list>a>h3 {
-    margin-right: 5px;
-}
-
-#input-reference>section>ul.item-list>li.inline-list {
-    display: inline;
-    border: none;
-    padding-right: 0;
-    font-size: 0.8em;
-    padding: 0;
-}
 
 #input-reference header>div>em {
 }
